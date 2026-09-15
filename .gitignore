@@ -1,5 +1,5 @@
-# Created from gitignore.io / Toptal-style templates for:
-# Node, Python, VisualStudioCode, Windows, macOS, Linux
+# Generated for Node, Python, VisualStudioCode, Windows, macOS, Linux
+# Template categories follow gitignore.io / Toptal conventions.
 
 ### Node ###
 node_modules/
