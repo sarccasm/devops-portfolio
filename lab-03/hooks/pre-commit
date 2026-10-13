@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo=$(git rev-parse --show-toplevel)
+cd "$repo"
+
+if command -v python3 >/dev/null 2>&1 &&
+   python3 -c 'import sys' >/dev/null 2>&1; then
+    PYTHON=python3
+elif command -v python >/dev/null 2>&1 &&
+     python -c 'import sys' >/dev/null 2>&1; then
+    PYTHON=python
+else
+    echo 'Python is required' >&2
+    exit 1
+fi
+
+mapfile -d '' staged < <(
+    git diff --cached --name-only --diff-filter=ACM -z
+)
+
+for file in "${staged[@]}"; do
+    [[ -f "$file" ]] || continue
+
+    case "$file" in
+        *.sh)
+            if command -v shellcheck >/dev/null 2>&1; then
+                shellcheck -- "$file"
+            else
+                echo 'ShellCheck is required for staged .sh files' >&2
+                exit 1
+            fi
+            ;;
+        *.py)
+            "$PYTHON" -m py_compile "$file"
+
+            if "$PYTHON" -m ruff --version >/dev/null 2>&1; then
+                "$PYTHON" -m ruff check -- "$file"
+            elif command -v ruff >/dev/null 2>&1; then
+                ruff check -- "$file"
+            else
+                echo 'Ruff is required for staged .py files' >&2
+                exit 1
+            fi
+            ;;
+    esac
+done
+
+echo 'pre-commit: staged files passed lint'

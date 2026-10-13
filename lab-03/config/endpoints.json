@@ -1,0 +1,9 @@
+{
+  "targets": [
+    {"name": "Example OK", "url": "https://example.com/", "expected_status": 200, "timeout": 5, "slow_threshold": 2},
+    {"name": "Example 404", "url": "https://example.com/not-found-devops-lab-03", "expected_status": 200, "timeout": 5, "slow_threshold": 2},
+    {"name": "Invalid DNS", "url": "https://nonexistent-devops-lab-03.invalid/", "expected_status": 200, "timeout": 3, "slow_threshold": 2},
+    {"name": "Connection refused", "url": "http://127.0.0.1:1/", "expected_status": 200, "timeout": 3, "slow_threshold": 2},
+    {"name": "Bad certificate", "url": "https://expired.badssl.com/", "expected_status": 200, "timeout": 5, "slow_threshold": 2}
+  ]
+}
