@@ -265,3 +265,33 @@ The GitHub Actions UI CI workflow uses npm dependency caching through `actions/s
 
 - [Run #1: Cache miss](https://github.com/sarccasm/wishlist-ui/actions/runs/39416029554)
 - [Run #3: Cache hit](https://github.com/sarccasm/wishlist-ui/actions/runs/39416188966)
+
+
+
+## CI Screenshots
+
+The following screenshots provide evidence of CI execution, workflow logs, dependency caching, and successful pull request merges.
+
+### 1. API CI: Initial Failure
+
+![API CI failure](screenshots/01-api-failed.png)
+
+### 2. API Pull Request Merged
+
+![API pull request merged](screenshots/02-api-pr-merged.png)
+
+### 3. API CI Job Log
+
+![API CI logs](screenshots/03-api-ci-log.png)
+
+### 4. UI CI: Successful Run
+
+![UI CI successful run](screenshots/04-ui-ci-passed.png)
+
+### 5. UI Dependency Cache Log
+
+![UI cache log](screenshots/05-ui-cache-log.png)
+
+### 6. Portfolio Pull Request Merged
+
+![Portfolio pull request merged](screenshots/06-portfolio-pr-merged.png)
