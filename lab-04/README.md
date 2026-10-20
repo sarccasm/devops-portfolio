@@ -118,7 +118,40 @@ The frontend-to-backend integration was not verified locally.
 
 **Local environment limitation:** Docker Desktop could not start because CPU virtualization was disabled. Instead, PostgreSQL and Redis services were used in GitHub Actions to run automated backend checks.
 
-## CI Pipelines
+
+## API CI Cache Comparison
+
+The GitHub Actions API CI workflow uses pip dependency caching through `actions/setup-python@v5`.
+
+### Cache Performance
+
+| Metric | Cache miss (Run #1) | Cache hit (Run #10) |
+|---|---|---|
+| Cache status | Cache not found | Cache restored successfully |
+| Set up Python | 1 second | 5 seconds |
+| Install dependencies | 9 seconds | 9 seconds |
+| Total job duration | 39 seconds | 48 seconds |
+| Result | Failed (Ruff) | Passed |
+
+### Analysis
+
+The first workflow run did not find an existing pip cache, while Run #10 successfully restored the dependency cache.
+
+Both runs spent approximately 9 seconds installing dependencies. Therefore, no measurable improvement in dependency installation time was observed.
+
+The total workflow duration increased from 39 to 48 seconds. However, these results are not directly comparable because Run #1 failed during Ruff linting and skipped the tests, while Run #10 completed successfully.
+
+### Conclusion
+
+Dependency caching was successfully configured and verified using GitHub Actions.
+
+Although the cache was restored successfully, the measured installation time did not decrease. Additional successful workflow runs would be needed to evaluate the performance benefits more accurately.
+
+### Evidence
+
+- [Run #1: Cache miss](https://github.com/sarccasm/wishlist-api/actions/runs/39414264533)
+- [Run #10: Cache hit](https://github.com/sarccasm/wishlist-api/actions/runs/39418851161)
+
 
 ### API CI
 
@@ -213,3 +246,22 @@ The backend pipeline successfully runs automated checks with PostgreSQL and Redi
 Pull requests, automated tests, and branch protection rulesets provide a more reliable workflow for integrating code changes.
 
 Local full-stack integration testing remains incomplete because Docker Desktop could not start on the development machine.
+
+## UI CI Cache Comparison
+
+The GitHub Actions UI CI workflow uses npm dependency caching through `actions/setup-node@v4`.
+
+| Metric | Cache miss (Run #1) | Cache hit (Run #3) |
+|---|---|---|
+| Cache status | Cache not found | Cache restored successfully |
+| Set up Node.js | 1 second | 2 seconds |
+| Install dependencies | 6 seconds | 5 seconds |
+| Total job duration | 19 seconds | 20 seconds |
+| Result | Passed | Passed |
+
+**Conclusion:** npm dependency caching was successfully configured and verified. Dependency installation improved slightly from 6 to 5 seconds. However, the total workflow duration increased from 19 to 20 seconds. This indicates that caching does not always significantly reduce execution time for small projects.
+
+**Evidence:**
+
+- [Run #1: Cache miss](https://github.com/sarccasm/wishlist-ui/actions/runs/39416029554)
+- [Run #3: Cache hit](https://github.com/sarccasm/wishlist-ui/actions/runs/39416188966)
