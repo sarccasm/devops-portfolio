@@ -1,0 +1,8 @@
+*.log
+__pycache__/
+*.pyc
+monitor-results.json
+system-monitor.log
+reports/
+file-sorter
+.DS_Store
