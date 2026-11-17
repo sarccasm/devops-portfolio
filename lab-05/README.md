@@ -12,6 +12,7 @@ This lab continues Lab 04 and uses the same Wishlist API and UI repositories:
 - API GHCR package (public): https://github.com/users/sarccasm/packages/container/wishlist-api
 - UI GHCR package (public): https://github.com/users/sarccasm/packages/container/wishlist-ui
 - API release: https://github.com/sarccasm/wishlist-api/releases/tag/v1.0.0
+- API anonymous pull and full CI verified: https://github.com/sarccasm/wishlist-api/actions/runs/44074110848
 - UI release: https://github.com/sarccasm/wishlist-ui/releases/tag/v1.0.0
 - Anonymous UI image pull verified in CI: https://github.com/sarccasm/wishlist-ui/actions/runs/44073968417
 
@@ -59,7 +60,7 @@ The API dependency layer is 78.5 MB. The final UI image has only nginx and about
 
 ## Published images and verification
 
-Both GHCR packages are public, and both repositories publish versioned images on the `v*` tag workflow. The UI `v1.0.0` job passed its anonymous pull check. The API `v1.0.0` job is running; its run will be linked here when it completes.
+Both GHCR packages are public, and both repositories publish versioned images on the `v*` tag workflow. The `v1.0.0` jobs for both API and UI passed anonymous pulls, without credentials. The API run also passed the full Compose smoke check.
 
 ```bash
 docker pull ghcr.io/sarccasm/wishlist-api:1.0.0
