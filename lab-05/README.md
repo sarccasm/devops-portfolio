@@ -8,11 +8,16 @@ This lab continues Lab 04 and uses the same Wishlist API and UI repositories:
 - UI: https://github.com/sarccasm/wishlist-ui
 - API implementation PR: https://github.com/sarccasm/wishlist-api/pull/3
 - UI implementation PR: https://github.com/sarccasm/wishlist-ui/pull/2
-- Successful CI/Compose smoke run: https://github.com/sarccasm/wishlist-api/actions/runs/44071745081
+- Successful CI/Compose smoke run: https://github.com/sarccasm/wishlist-api/actions/runs/44073819520
+- API GHCR package (public): https://github.com/users/sarccasm/packages/container/wishlist-api
+- UI GHCR package (public): https://github.com/users/sarccasm/packages/container/wishlist-ui
+- API release: https://github.com/sarccasm/wishlist-api/releases/tag/v1.0.0
+- UI release: https://github.com/sarccasm/wishlist-ui/releases/tag/v1.0.0
+- Anonymous UI image pull verified in CI: https://github.com/sarccasm/wishlist-ui/actions/runs/44073968417
 
 ## My contribution
 
-The implementation is prepared on the `lab-05-containers` branches and is under review:
+The implementation is merged into `main` in both team repositories:
 
 - Added a non-root, multi-stage API image and a Node-build/nginx-runtime UI image.
 - Added Docker ignore rules so secrets, tests, local dependencies, and Git metadata stay out of the build contexts.
@@ -52,6 +57,15 @@ Measured by `docker image inspect` on the Ubuntu 24.04 GitHub runner:
 
 The API dependency layer is 78.5 MB. The final UI image has only nginx and about 160 KB of compiled `dist/`; Node and `node_modules` stay in the build stage. The workflow run includes the raw size and layer-history artifact.
 
+## Published images and verification
+
+Both GHCR packages are public, and both repositories publish versioned images on the `v*` tag workflow. The UI `v1.0.0` job passed its anonymous pull check. The API `v1.0.0` job is running; its run will be linked here when it completes.
+
+```bash
+docker pull ghcr.io/sarccasm/wishlist-api:1.0.0
+docker pull ghcr.io/sarccasm/wishlist-ui:1.0.0
+```
+
 ## Remaining submission evidence
 
-The full stack, API login/list creation, UI route fallback, and PostgreSQL volume persistence passed in CI. Before final submission, capture the teammate fault-injection diagnosis required by the lab. After the first main/tag publication, set both GHCR packages to Public and capture the package pages plus an anonymous `docker pull`.
+The full stack, API login/list creation, UI route fallback, PostgreSQL volume persistence, and anonymous UI pull passed in CI. The lab's human teammate fault-injection exercise still needs a real second participant and their screenshot; the CI diagnostics and checklist are recorded in the API container documentation.
