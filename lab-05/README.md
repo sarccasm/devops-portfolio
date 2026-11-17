@@ -8,7 +8,7 @@ This lab continues Lab 04 and uses the same Wishlist API and UI repositories:
 - UI: https://github.com/sarccasm/wishlist-ui
 - API implementation PR: https://github.com/sarccasm/wishlist-api/pull/3
 - UI implementation PR: https://github.com/sarccasm/wishlist-ui/pull/2
-- Successful CI/Compose smoke run: https://github.com/sarccasm/wishlist-api/actions/runs/44070664186
+- Successful CI/Compose smoke run: https://github.com/sarccasm/wishlist-api/actions/runs/44071745081
 
 ## My contribution
 
