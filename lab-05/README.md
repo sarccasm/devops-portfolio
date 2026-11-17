@@ -13,6 +13,7 @@ This lab continues Lab 04 and uses the same Wishlist API and UI repositories:
 - UI GHCR package (public): https://github.com/users/sarccasm/packages/container/wishlist-ui
 - API release: https://github.com/sarccasm/wishlist-api/releases/tag/v1.0.0
 - API anonymous pull and full CI verified: https://github.com/sarccasm/wishlist-api/actions/runs/44074110848
+- Controlled Docker fault diagnosis and uploaded evidence: https://github.com/sarccasm/wishlist-api/actions/runs/44076616564
 - UI release: https://github.com/sarccasm/wishlist-ui/releases/tag/v1.0.0
 - Anonymous UI image pull verified in CI: https://github.com/sarccasm/wishlist-ui/actions/runs/44073968417
 
@@ -25,7 +26,7 @@ The implementation is merged into `main` in both team repositories:
 - Added a Compose stack for PostgreSQL, Redis, API, and UI, with health checks, startup ordering, named PostgreSQL storage, and only UI/API ports exposed.
 - Extended each repository's existing CI workflow to build images after its existing checks and publish on `main` and version tags.
 - Added a Compose smoke check that creates a wishlist through the API, restarts the stack, confirms database persistence, checks the UI route fallback, and records image sizes and layer history.
-- Recorded setup, troubleshooting, the two configuration issues discovered during the smoke check, image measurements, and release instructions in [API container documentation](https://github.com/sarccasm/wishlist-api/blob/lab-05-containers/docs/containers.md).
+- Recorded setup, troubleshooting, the two configuration issues discovered during the smoke check, image measurements, and release instructions in [API container documentation](https://github.com/sarccasm/wishlist-api/blob/main/docs/containers.md).
 
 ## Run the stack
 
@@ -69,4 +70,4 @@ docker pull ghcr.io/sarccasm/wishlist-ui:1.0.0
 
 ## Remaining submission evidence
 
-The full stack, API login/list creation, UI route fallback, PostgreSQL volume persistence, and anonymous UI pull passed in CI. The lab's human teammate fault-injection exercise still needs a real second participant and their screenshot; the CI diagnostics and checklist are recorded in the API container documentation.
+The full stack, API login/list creation, UI route fallback, PostgreSQL volume persistence, and anonymous UI pull passed in CI. A controlled Docker CI fault-injection simulation now records the real `127.0.0.1` database-connection failure in [run #45](https://github.com/sarccasm/wishlist-api/actions/runs/44076616564). If the instructor strictly requires a human teammate, only that paired screenshot still needs to be captured; the automated run is clearly identified as a simulation.
