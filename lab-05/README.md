@@ -9,8 +9,8 @@ This lab continues Lab 04 and uses the same Wishlist API and UI repositories:
 - API implementation PR: https://github.com/sarccasm/wishlist-api/pull/3
 - UI implementation PR: https://github.com/sarccasm/wishlist-ui/pull/2
 - Successful CI/Compose smoke run: https://github.com/sarccasm/wishlist-api/actions/runs/44073819520
-- API GHCR package (public): https://github.com/users/sarccasm/packages/container/wishlist-api
-- UI GHCR package (public): https://github.com/users/sarccasm/packages/container/wishlist-ui
+- API GHCR package (public): https://github.com/sarccasm/wishlist-api/pkgs/container/wishlist-api
+- UI GHCR package (public): https://github.com/sarccasm/wishlist-ui/pkgs/container/wishlist-ui
 - API release: https://github.com/sarccasm/wishlist-api/releases/tag/v1.0.0
 - API anonymous pull and full CI verified: https://github.com/sarccasm/wishlist-api/actions/runs/44074110848
 - Controlled Docker fault diagnosis and uploaded evidence: https://github.com/sarccasm/wishlist-api/actions/runs/44076616564
